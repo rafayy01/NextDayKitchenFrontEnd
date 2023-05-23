@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import { toast, ToastContainer } from "react-toastify";
 import NavBar from "./components/Navbar/Navbar";
 import User from "./pages/User/User";
@@ -27,86 +27,131 @@ import AddSubscription from "./pages/subscription/crud/Add";
 import EditSubscription from "./pages/subscription/crud/Edit";
 import CookingRound from "./pages/cookingRound/CookingRound";
 import EditMealRound from "./pages/viewRound/EditMealRound";
+import PreCookingRound from "./pages/cookingRound/PreCookingRound";
+import { preRoundContext } from "./Contexts/PreRound";
+import PreCookingRound1 from "./pages/cookingRound/PreCookingRound1";
 
 function App() {
+   const [preRoundData, setPreRoundData] = useState([]);
+   const [categoryList, setCategoryList] = useState([]);
+   const [addOnList, setAddOnList] = useState([]);
+   const [startDate, setStartDate] = useState("");
+   const [endDate, setEndDate] = useState("");
+  const [carbsList, setCarbsList] = useState([]);
+
   return (
-    <BrowserRouter>
-      <Container fluid>
-        <ToastContainer />
-        <NavBar />
-        <Routes>
-          <Route exact path="/" element={<User />} />
+    <preRoundContext.Provider
+      value={{
+        preRoundData,
+        setPreRoundData,
+        categoryList,
+        setCategoryList,
+        addOnList,
+        setAddOnList,
+        startDate,
+        setStartDate,
+        endDate,
+        setEndDate,
+        carbsList,
+        setCarbsList,
+      }}
+    >
+      <BrowserRouter>
+        <Container fluid>
+          <ToastContainer />
+          <NavBar />
+          <Routes>
+            <Route exact path="/" element={<User />} />
 
-          {/* Meal Routes */}
-          <Route exact path="/meal" element={<Meal />} />
-          <Route exact path="/meal/addMeal" element={<AddMeal />} />
-          <Route exact path="/meal/editMeal/:id" element={<EditMeal />} />
-          <Route exact path="/meal/detailmeal/:id" element={<DetailMeal />} />
+            {/* Meal Routes */}
+            <Route exact path="/meal" element={<Meal />} />
+            <Route exact path="/meal/addMeal" element={<AddMeal />} />
+            <Route exact path="/meal/editMeal/:id" element={<EditMeal />} />
+            <Route exact path="/meal/detailmeal/:id" element={<DetailMeal />} />
 
-          {/* Ingredient Routes */}
-          <Route exact path="/Meal/Ingredients/:id" element={<Ingredients />} />
+            {/* Ingredient Routes */}
+            <Route
+              exact
+              path="/Meal/Ingredients/:id"
+              element={<Ingredients />}
+            />
 
-          {/* MealCategory Routes */}
-          <Route exact path="/mealCategory/list" element={<MealCategory />} />
-          <Route
-            exact
-            path="/mealCategory/addMealCategory"
-            element={<AddMealCategory />}
-          />
-          <Route
-            exact
-            path="/mealCategory/editMealCategory/:id"
-            element={<EditMealCategory />}
-          />
-          {/* <Route exact path="/mealCategory/detailmeal/:id" element={<DetailMeal />} /> */}
+            {/* MealCategory Routes */}
+            <Route exact path="/mealCategory/list" element={<MealCategory />} />
+            <Route
+              exact
+              path="/mealCategory/addMealCategory"
+              element={<AddMealCategory />}
+            />
+            <Route
+              exact
+              path="/mealCategory/editMealCategory/:id"
+              element={<EditMealCategory />}
+            />
+            {/* <Route exact path="/mealCategory/detailmeal/:id" element={<DetailMeal />} /> */}
 
-          {/* Clients and subscriptions management */}
-          <Route exact path="/clients" element={<Clients />} />
-          <Route exact path="/clients/add" element={<AddClient />} />
-          <Route exact path="/clients/edit/:id" element={<EditClient />} />
-          {/* <Route exact path="/clients/manage/:id" element={<ClientSubsctiption />} /> */}
+            {/* Clients and subscriptions management */}
+            <Route exact path="/clients" element={<Clients />} />
+            <Route exact path="/clients/add" element={<AddClient />} />
+            <Route exact path="/clients/edit/:id" element={<EditClient />} />
+            {/* <Route exact path="/clients/manage/:id" element={<ClientSubsctiption />} /> */}
 
-          {/* Clients and subscriptions management */}
-          <Route exact path="/subscription" element={<Subscription />} />
-          <Route exact path="/subscription/add" element={<AddSubscription />} />
-          <Route
-            exact
-            path="/subscription/edit/:id"
-            element={<EditSubscription />}
-          />
-          <Route
-            exact
-            path="/editMealRound/edit/:id"
-            element={<EditMealRound />}
-          />
-          {/* <Route exact path="/clients/manage/:id" element={<ClientSubsctiption />} /> */}
+            {/* Clients and subscriptions management */}
+            <Route exact path="/subscription" element={<Subscription />} />
+            <Route
+              exact
+              path="/subscription/add"
+              element={<AddSubscription />}
+            />
+            <Route
+              exact
+              path="/subscription/edit/:id"
+              element={<EditSubscription />}
+            />
+            <Route
+              exact
+              path="/precookinground"
+              element={<PreCookingRound />}
+            />
+            <Route
+              exact
+              path="/precookinground1"
+              element={<PreCookingRound1 />}
+            />
+            <Route
+              exact
+              path="/editMealRound/edit/:id"
+              element={<EditMealRound />}
+            />
+            {/* <Route exact path="/clients/manage/:id" element={<ClientSubsctiption />} /> */}
 
-          {/* <Route exact path="Subscriptions" element={<Subscriptions />} /> */}
+            {/* <Route exact path="Subscriptions" element={<Subscriptions />} /> */}
 
-          {/* MealMeasurement Routes */}
-          <Route
-            exact
-            path="/mealMeasurement/list"
-            element={<MealMeasurementList />}
-          />
-          <Route
-            exact
-            path="/mealMeasurement/addMealMeasurement"
-            element={<AddMealMeasurement />}
-          />
-          <Route
-            exact
-            path="/mealMeasurement/editMealMeasurement/:id"
-            element={<EditMealMeasurement />}
-          />
-          {/* <Route exact path="/mealMeasurement/detailMeasurement/:id" element={<DetailMeal />} /> */}
+            {/* MealMeasurement Routes */}
+            <Route
+              exact
+              path="/mealMeasurement/list"
+              element={<MealMeasurementList />}
+            />
+            <Route
+              exact
+              path="/mealMeasurement/addMealMeasurement"
+              element={<AddMealMeasurement />}
+            />
+            <Route
+              exact
+              path="/mealMeasurement/editMealMeasurement/:id"
+              element={<EditMealMeasurement />}
+            />
+            {/* <Route exact path="/mealMeasurement/detailMeasurement/:id" element={<DetailMeal />} /> */}
 
-          {/* Cooking Round Routes */}
-          <Route exact path="/cookingRound" element={<CookingRound />} />
-          <Route exact path="/viewRound" element={<ViewRound />} />
-        </Routes>
-      </Container>
-    </BrowserRouter>
+            {/* Cooking Round Routes */}
+            <Route exact path="/cookingRound" element={<CookingRound />} />
+            <Route exact path="/viewRound" element={<ViewRound />} />
+          </Routes>
+        </Container>
+      </BrowserRouter>
+    </preRoundContext.Provider>
   );
 }
 

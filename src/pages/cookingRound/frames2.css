@@ -1,0 +1,56 @@
+.CookingRound {
+  margin-top: 100px;
+  height: 500px;
+}
+body{
+  background-image: url('../../../public/pexels-lukas.jpg');
+  background-size: cover;
+background-position: center;
+
+
+
+}
+.startDate {
+  padding-top: 180px;
+  margin-left: 400px;
+}
+.endDate {
+  padding-top: 180px;
+  margin-right: 250px;
+}
+
+.submit {
+  padding-left: 700px;
+  padding-top: 100px;
+}
+.Rounds {
+  
+  margin-top: 100px;
+  height: 100%;
+}
+.MainRow {
+  padding-top: 50px;
+}
+.MainCol1 {
+  margin-left: 30px;
+}
+.vl {
+  border-left: 2px solid black;
+  height: 300px;
+  margin-left: 80px;
+}
+.v2 {
+  border-left: 2px solid black;
+  width: 300px;
+}
+.table {
+  width: 600px;
+  padding-left: 135px;
+}
+.category {
+  position: relative;
+  width: 200px;
+  height: 40px;
+  background-color: rgb(80, 80, 189);
+  color: white;
+}

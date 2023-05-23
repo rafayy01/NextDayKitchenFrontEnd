@@ -23,6 +23,9 @@ function NavBar() {
             <Link to="subscription" className="link m-1">
               <span>Subscription</span>
             </Link>
+            <Link to="precookinground" className="link m-1">
+              <span>Pre-Cooking Round</span>
+            </Link>
             <Link to="cookingRound" className="link m-1">
               <span>Cooking Round</span>
             </Link>

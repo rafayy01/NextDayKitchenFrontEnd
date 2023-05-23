@@ -226,6 +226,9 @@ export default function CookingRoundTable({
               <td>{tablebody.CurrentTotalProteins}</td>
               <td>{tablebody.TargetCalories}</td>
               <td>{tablebody.TargetProteins}</td>
+              <td>{tablebody.TargetFat}</td>
+              <td>{tablebody.CurrentTotalFat}</td>
+              <td>{tablebody.CurrentTotalCarb}</td>
               <td>
                 <button
                   onClick={() =>
@@ -251,6 +254,9 @@ export default function CookingRoundTable({
               <td>{tablebody.CurrentTotalProteins}</td>
               <td>{tablebody.TargetCalories}</td>
               <td>{tablebody.TargetProteins}</td>
+              <td>{tablebody.TargetFat}</td>
+              <td>{tablebody.CurrentTotalFat}</td>
+              <td>{tablebody.CurrentTotalCarb}</td>
               <td>
                 <button onClick={() => handleEdit(tablebody)}>
                   Edit Portion

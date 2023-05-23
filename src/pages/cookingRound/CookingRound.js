@@ -43,12 +43,16 @@ const CookingRound = () => {
             "MinPortion",
             "MaxPortion",
             "Portion",
-            "MealProteins",
+            "MealProtein",
             "MealCalories",
             "CurrentTotalCalories",
             "CurrentTotalProteins",
             "TargetCalories",
             "TargetProteins",
+            "TargetFat",
+            "CurrentTotalFat",
+            "CurrentTotalCarb",
+            "Actions",
           ]}
         />
       </Col>
