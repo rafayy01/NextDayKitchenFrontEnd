@@ -38,33 +38,38 @@ const PreCookingRound = () => {
 
   return (
     <div className="CookingRound">
-      <Row>
-        <Col className="startDate">
-          <h4>Enter Start Date</h4>
+      <Col>
+        <Row className="startDate">
+          <span class="dateStyle">Enter Start Date</span>
 
           <input
             type="date"
             onChange={(e) => setStartDate(e.target.value)}
-            style={{ width: "50%", marginLeft: "12px", height: "40px" }}
+            style={{ width: "20%", marginLeft: "12px", height: "40px" }}
           />
-        </Col>
-        <Col className="endDate">
-          <h4>Enter End Date</h4>
+        </Row>
+        <Row className="endDate">
+          <span class="dateStyle">Enter End Date</span>
 
           <input
             type="date"
             min={startDate}
             onChange={(e) => setEndDate(e.target.value)}
-            style={{ width: "50%", marginLeft: "12px", height: "40px" }}
+            style={{ width: "20%", marginLeft: "12px", height: "40px" }}
           />
-        </Col>
-      </Row>
+        </Row>
+      </Col>
       <Row className="submit">
         <div>
           <Link to="/precookinground1">
             <Button
-              class="btn btn-lg"
-              style={{width:"90px",height:"50px",fontSize:"20px",backgroundColor:"green",color:"white"}}
+              class="btn btn-info text-white  btn btn-primary"
+              style={{
+                width: "70px",
+                height: "50px",
+                fontSize: "15px",
+                color: "white",
+              }}
               onClick={() => getPreRoundData()}
             >
               Submit

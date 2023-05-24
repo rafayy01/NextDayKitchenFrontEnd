@@ -1,0 +1,8 @@
+.Rounds{
+  background-image: url('../../../public/pre-cooking.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 57% ;
+  height: 100%;
+ color: white;
+}

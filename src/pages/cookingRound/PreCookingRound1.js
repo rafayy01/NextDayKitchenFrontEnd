@@ -11,6 +11,7 @@ import AddOnTypeModal from "../../components/RoundTypeModal/AddOnTypeModal";
 import { toastmessage } from "../../components/ToastMessage/toast";
 import axios from "axios";
 import CarbsTypeModal from "../../components/RoundTypeModal/CarbsTypeModal";
+import "./preRound1.css"
 const PreCookingRound1 = () => {
   const {
     preRoundData,
@@ -225,7 +226,7 @@ const PreCookingRound1 = () => {
   console.log("CarbsListInput", carbsList);
   return (
     <div className="Rounds">
-      <Row style={{ marginLeft: "20px", paddingTop: "150px", color: "black" }}>
+      <Row style={{ marginLeft: "50px", paddingTop: "150px", color: "white",fontWeight:"400" }}>
         Round ID:
         {preRoundData.newRoundId}
       </Row>
