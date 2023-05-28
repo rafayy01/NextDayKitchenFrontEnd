@@ -226,21 +226,43 @@ const PreCookingRound1 = () => {
   console.log("CarbsListInput", carbsList);
   return (
     <div className="Rounds">
-      <Row style={{ marginLeft: "50px", paddingTop: "150px", color: "white",fontWeight:"400" }}>
-        Round ID:
-        {preRoundData.newRoundId}
+      <Row style={{ marginLeft: "200px" }}>
+        <Col
+          style={{
+            marginLeft: "20px",
+            paddingTop: "150px",
+            color: "#272d36",
+            fontWeight: "bold",
+            fontSize: "30px",
+          }}
+        >
+          Round ID:
+          {preRoundData.newRoundId}
+        </Col>
+        <Col>
+          <div class="visual">
+            <img
+              src="https://raw.githubusercontent.com/programmercloud/foodlover/main/img/home-banner.png"
+              alt=""
+              width="400px"
+            />
+          </div>
+        </Col>
       </Row>
       <Row className="MainRow">
         {result.length != 0 ? (
           result.map((item) => {
             return (
-              <Col className="MainCol1">
+              <Col
+                className="MainCol1"
+                style={{ flexBasis: "50%", boxSizing: "border-box" }}
+              >
                 <br />
                 <br />
 
-                <Row>
+                <Row style={{ marginLeft: "20px" }}>
                   <Col>
-                    <Row>{item}</Row>
+                    <Row style={{ marginLeft: "2px" }}>{item}</Row>
                     <Row>
                       {categoryList
                         ?.filter((obj) => obj.mealCategory == item)
@@ -278,7 +300,7 @@ const PreCookingRound1 = () => {
                             </div>
                           </div>
                         </Col>
-                        <Col md="4">
+                        <Col>
                           <div style={{ marginTop: "30px" }}>
                             <SiAddthis onClick={HandleAddMeal2} color="red" />
                           </div>
@@ -312,20 +334,10 @@ const PreCookingRound1 = () => {
                   </Col> */}
                 </Row>
                 {item == "Beef" ? (
-                  <Row style={{ paddingTop: "200px", marginRight: "10px" }}>
+                  <Row style={{ marginTop: "20px", marginLeft: "17px" }}>
                     {addOnList.map((data, index) => {
                       return (
                         <div key={data.id}>
-                          {/* <span
-                            style={{
-                              paddingLeft: "10px",
-                              paddingRight: "30px",
-                            }}
-                          >
-                            {data.food}
-                          </span> */}
-
-                          {/* <div style={{ marginTop: "10px" }}> */}
                           <span
                             style={{
                               paddingLeft: "10px",
@@ -366,17 +378,19 @@ const PreCookingRound1 = () => {
                         </div>
                       );
                     })}
-                    <Button
+                    <button
                       style={{
                         marginTop: "50px",
                         marginLeft: "400px",
                         width: "100px",
+                        backgroundColor: "#ff702a",
+                        color: "white",
                       }}
                       class="btn active"
                       onClick={() => AddNewFood()}
                     >
                       Add Food
-                    </Button>
+                    </button>
                   </Row>
                 ) : (
                   <div></div>
@@ -385,34 +399,49 @@ const PreCookingRound1 = () => {
             );
           })
         ) : (
-          <div style={{ marginLeft: "600px", color: "red" }}>
+          <div
+            style={{
+              marginLeft: "600px",
+              color: "red",
+              fontWeight: "bold",
+              fontSize: "30px",
+            }}
+          >
             Nothing to Show
           </div>
         )}
       </Row>
-
-      <Row>
-        {/* <div class="v2"></div> */}
-        <hr
+      {/* <Row>
+        <Button
           style={{
-            width: "1200px",
-            marginLeft: "100px",
-            borderLeft: "4px solid #00000",
             marginTop: "50px",
+            marginLeft: "400px",
+            width: "100px",
           }}
-        />
-      </Row>
-      <Row>
-        <Col style={{ marginLeft: "135px" }}>
+          class="btn active"
+          onClick={() => AddNewFood()}
+        >
+          Add Food
+        </Button>
+      </Row> */}
+      <Row className="calculateTotal">
+        <Col style={{ marginLeft: "50px", marginTop: "50px" }}>
           <Row>Total Chicken: {sum.Chicken ? sum.Chicken : 0}</Row>
           <Row>Total Beef: {sum.Beef ? sum.Beef : 0} </Row>
           <Row>Total Breakfast: {sum.Breakfast ? sum.Breakfast : 0}</Row>
-          <Button onClick={calculateTotal}>Calculate</Button>
         </Col>
         <Col>
-          <Button style={{ marginTop: "30px" }} onClick={() => handleSubmit()}>
-            Submit
-          </Button>
+          <Row style={{ marginTop: "40px", width: "150px" }}>
+            <Button onClick={calculateTotal}>Calculate Total</Button>
+          </Row>
+          <Row>
+            <Button
+              style={{ marginTop: "20px", width: "150px" }}
+              onClick={() => handleSubmit()}
+            >
+              Submit
+            </Button>
+          </Row>
         </Col>
       </Row>
       <br />
