@@ -25,8 +25,11 @@ function ClientForm(props) {
   const [clientId, setClientId] = useState();
   const [clientName, setClientName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState();
-  const [id, setId] = useState("")
-
+  const [id, setId] = useState("");
+  const [age, setAge] = useState();
+  const [gender, setGender] = useState("");
+  const [location, setLocation] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState('+966')
   const navigate = useNavigate();
 
   const HandleSubmit = async (e) => {
@@ -36,7 +39,7 @@ function ClientForm(props) {
       const addClientObj = {
         clientId,
         clientName,
-        phoneNumber
+        phoneNumber: selectedCountry + phoneNumber
       };
       const header = { "Content-Type": "application/json" };
       await axios
@@ -53,7 +56,7 @@ function ClientForm(props) {
       const addClientObj = {
         clientId,
         clientName,
-        phoneNumber
+        phoneNumber: phoneNumber
       };
       console.log(addClientObj, "addClient");
       const header = { "Content-Type": "application/json" };
@@ -82,6 +85,15 @@ function ClientForm(props) {
     }
   }, [props.client]);
 
+  const countryOptions = [
+    { label: 'Saudi Arabia (+966)', value: '+966' },
+    // Add other country options here
+    { label: 'United States (+1)', value: '+1' },
+    { label: 'United Kingdom (+44)', value: '+44' },
+    // Add more countries as needed
+  ];
+console.log(phoneNumber);
+
   return (
     <Row className="max-width explore-section">
       <Col>
@@ -98,7 +110,7 @@ function ClientForm(props) {
                   <Form.Label>Client Id</Form.Label>
                   <Form.Control
                     type="number"
-                    placeholder="Enter Client Name"
+                    placeholder="Enter Client Id"
                     value={clientId}
                     onChange={(e) => {
                       setClientId(e.target.value);
@@ -110,7 +122,7 @@ function ClientForm(props) {
               <Form.Group className="mb-3" controlId="formGridMealDescription">
                 <Form.Label>Client Description</Form.Label>
                 <Form.Control
-                  placeholder="Enter Client Name"
+                  placeholder="Enter Client Description"
                   value={clientName}
                   onChange={(e) => {
                     setClientName(e.target.value);
@@ -120,19 +132,73 @@ function ClientForm(props) {
 
               <Row className="mb-3">
                 <Form.Group as={Col} controlId="formGridCity">
-                  <Form.Label>Phone Number(e.g:0313323)</Form.Label>
+                  <Form.Label>Phone Number</Form.Label>
+                  <div style={{display: "flex"}}> 
+                  <div style={{width: "30%"}}>
+                    <Select
+                      options={countryOptions}
+                      value={countryOptions.find(option => option.value === selectedCountry)}
+                      onChange={selectedOption => setSelectedCountry(selectedOption.value)}
+                    />
+                  </div>
+                  <div style={{width: "70%"}}>
                   <Form.Control
                     type="number"
                     placeholder="Enter Phone Name"
                     value={phoneNumber}
                     onChange={(e) => {
-                      setPhoneNumber(e.target.value);
+                      const { value } = e.target;
+                      setPhoneNumber(value);
+                     
+                    }}
+                  />
+                  </div>
+                  
+                </div>
+
+                </Form.Group>
+
+
+              </Row>
+              <Row className="mb-3">
+                <Form.Group as={Col} controlId="formGridCity">
+                  <Form.Label>Age</Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="Enter Age"
+                    value={age}
+                    onChange={(e) => {
+                      setAge(e.target.value);
                     }}
                   />
                 </Form.Group>
 
               </Row>
+              <Form.Group controlId="gender">
+                <Form.Label>Gender</Form.Label>
+                <Form.Control as="select" value={gender} onChange={(e) => {
+                      setGender(e.target.value);
+                    }}>
+                  <option value="">Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </Form.Control>
+              </Form.Group>
+              <Row className="mb-3">
+                <Form.Group as={Col} controlId="formGridCity">
+                  <Form.Label>Location</Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="Enter Location"
+                    value={location}
+                    onChange={(e) => {
+                      setLocation(e.target.value);
+                    }}
+                  />
+                </Form.Group>
 
+              </Row>
               <Button variant="primary" type="submit">
                 Submit
               </Button>

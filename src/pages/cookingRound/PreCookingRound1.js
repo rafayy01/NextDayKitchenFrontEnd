@@ -225,8 +225,10 @@ const PreCookingRound1 = () => {
   console.log("Chciken Carbs", chickenCarbs);
   console.log("CarbsListInput", carbsList);
   return (
-    <div className="Rounds">
-      <Row style={{ marginLeft: "200px" }}>
+    <div className="Rounds" style={{overflow: "hidden"}}>
+      {output.length != 0 ? (
+          <div>
+<Row style={{ marginLeft: "200px" }}>
         <Col
           style={{
             marginLeft: "20px",
@@ -399,15 +401,8 @@ const PreCookingRound1 = () => {
             );
           })
         ) : (
-          <div
-            style={{
-              marginLeft: "600px",
-              color: "red",
-              fontWeight: "bold",
-              fontSize: "30px",
-            }}
-          >
-            Nothing to Show
+          <div>
+
           </div>
         )}
       </Row>
@@ -467,7 +462,7 @@ const PreCookingRound1 = () => {
               targetProtien,
             }) => {
               return (
-                <tbody>
+                <tbody style={{position: "relative", left: "120px"}}>
                   <tr>
                     <td>{clientId}</td>
                     <td>{moment.utc(date).format("YY/MM/DD")}</td>
@@ -519,6 +514,15 @@ const PreCookingRound1 = () => {
         setAddedMeal={setAddedMeal2}
         addOnId={addOnId}
       />
+            </div>
+      ): (
+        <div id="main">
+          <div class="fof">
+                <h1><i class="fa fa-times-circle"></i> No Record Found</h1>
+          </div>
+          </div>
+      )}
+      
     </div>
   );
 };

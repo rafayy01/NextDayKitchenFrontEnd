@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+ import React, { useState, useEffect } from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { InputGroup, Table } from "react-bootstrap";
+import Modal from 'react-bootstrap/Modal';
 import { Form } from "react-bootstrap";
 import styles from "./frame1.css";
 import DatePicker, { DateObject } from "react-multi-date-picker";
@@ -13,12 +14,70 @@ import { toastmessage } from "../../../components/ToastMessage/toast";
 import moment from "moment";
 import axios from "axios";
 import DatePanel from "react-multi-date-picker/plugins/date_panel";
+import Checkbox from "../../../components/Checkbox/Checkbox";
+
+
 const AddSubscription = () => {
   const [multiDate, setMultiDate] = useState([]);
   const [startDate, setStartDate] = useState();
   const [clientId, setclientId] = useState("");
   const [protein, setProtein] = useState("");
+  const[searchQuery,setSearchQuery]=useState("");
   const [calorie, setCalorie] = useState("");
+  const [isCheck, setIsCheck] = useState([]);
+  const [clientList, setClientList] = useState([]);
+  const [filteredClientList, setFilteredClientList] = useState([]);
+
+
+
+  
+  const GetAllClients = async () => {
+    await axios
+      .get(`http://localhost:8001/api/clients/getallclients`)
+      .then((res) => {
+        setClientList(res.data);
+        console.log("clients", res.data);
+      });
+  };
+  useEffect(() => {
+    GetAllClients();
+  }, []);
+  useEffect(() => {
+    console.log(clientList);
+    const filteredList = clientList.filter(({ clientName }) =>
+      clientName?.toLowerCase().includes(searchQuery?.toLowerCase())
+    );
+    setFilteredClientList(filteredList);
+  }, [searchQuery, clientList]);
+  
+  
+
+  const handleClick = (e) => {
+    const { id, checked, name } = e.target;
+   
+    console.log("length ", isCheck.length);
+   if(isCheck.length > 0 && checked){
+      toastmessage("Please select one client", "error");
+    }
+    else if(checked){
+      setIsCheck([...isCheck, id]);
+      setclientId(id);
+    console.log("client Id", clientId)
+
+    }
+    if (!checked && clientId == id) {
+      console.log("Unchecked")
+      setIsCheck(isCheck.filter((item) => item !== id));
+      setclientId("");
+      console.log("unchecked", isCheck);
+    }
+    
+    console.log(e.target);
+  };
+  console.log("check", isCheck);
+  const handleSave = () =>{
+
+  }
   const [finalWednesdayObject, setWednesdayObject] = useState({
     date: "",
     categories: [],
@@ -83,6 +142,7 @@ const AddSubscription = () => {
   const [dates, setDates] = useState([]);
   const [list, setList] = useState([]);
   const [total, setTotal] = useState([]);
+  const [show, setShow] = useState(false);
   dates.map((item) => {
     console.log(item.format());
   });
@@ -1285,11 +1345,73 @@ const AddSubscription = () => {
                 aria-label="Username"
                 aria-describedby="basic-addon1"
                 value={clientId}
-                onChange={(e) => {
-                  setclientId(e.target.value);
+                onClick={(e) => {
+                  setShow(true);
                 }}
               />
+              
             </InputGroup>
+             <Modal
+        show={show}
+        onHide={() => setShow(false)}
+        dialogClassName="modal-90w"
+        aria-labelledby="example-custom-modal-styling-title"
+      >
+          <Modal.Header closeButton>
+          <Modal.Title>Add Client</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Row>
+            <Row>
+              <Col>
+              <div className="search-bar">
+          <input
+            type="text"
+            placeholder="Search for a client..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
+                <Table striped bordered hover className=" table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Checkbox</th>
+                      <th>Client Name</th>
+                    </tr>
+                  </thead>
+
+                  {filteredClientList.map(({ clientId, clientName }) =>{
+                    return (
+                      <tbody>
+                        <tr>
+                          <td>
+                            <Checkbox
+                              key={id}
+                              type="checkbox"
+                              name={clientName}
+                              id={clientId}
+                              handleClick={handleClick}
+                            />
+                          </td>
+                          <td>{clientName}</td>
+                        </tr>
+                      </tbody>
+                    );
+                  })}
+                </Table>
+              </Col>
+            </Row>
+          </Row>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={()=> setShow(false)}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleSave}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
           </Row>
           <Row>
             <h6>Enter Start Date</h6>
