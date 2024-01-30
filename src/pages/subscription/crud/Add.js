@@ -76,7 +76,7 @@ const AddSubscription = () => {
   };
   console.log("check", isCheck);
   const handleSave = () =>{
-
+  setShow(false);
   }
   const [finalWednesdayObject, setWednesdayObject] = useState({
     date: "",

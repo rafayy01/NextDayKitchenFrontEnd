@@ -97,25 +97,22 @@ body {
 }
 
 .MainCol1 {
-  background-color: #fff;
+  background-color: #1e1c2a;
   border-radius: 10px;
   padding: 20px;
   margin-bottom: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease-in-out;
-  display:flex;
+  display: flex;
   flex-wrap: wrap;
- background-color: #1e1c2a;
- color: #ff702a;
- font-weight: 600;
-
-
+  color: #ff702a;
+  font-weight: 600;
+  transition: transform 0.3s ease-in-out;
 }
 
 .MainCol1:hover {
-  transform: translateY(px);
-
+  transform: translateY(-10px); /* Adjust the value to your preference */
 }
+
 
 .category:before {
   content: '';
